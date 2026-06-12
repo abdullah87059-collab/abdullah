@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أفضل وأدق حاسبة عمر إلكترونية لحساب العمر بالتفصيل بالتقويم الهجري والميلادي ومعرفة العمر بالسنوات والأشهر والأيام والساعات بدقة وبشكل فوري.">
+    <meta name="keywords" content="حاسبة العمر, احسب عمري, حساب العمر بالهجري, حساب العمر بالميلادي, كم عمري, حاسبه العمر, حساب العمر بالتفصيل">
+    <meta name="author" content="حاسبة العمر الاحترافية">
+    
     <title>حاسبة العمر الاحترافية - هجري وميلادي بالقوائم</title>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -75,7 +80,6 @@
             cursor: pointer;
         }
 
-        /* تنسيق القوائم المنسدلة الموحد */
         select {
             padding: 12px;
             font-size: 16px;
@@ -87,7 +91,6 @@
             transition: 0.3s;
         }
 
-        /* توزيع القوائم الثلاث بجانب بعضها */
         .dropdowns-container {
             display: flex;
             justify-content: center;
@@ -172,8 +175,8 @@
 
     <div class="main-content">
         <div class="card">
-            <h1>احسب عمرك بالتفصيل ⏱️</h1>
-            <p class="subtitle">اختر التقويم، حدد تاريخ ميلادك واكتشف تفاصيل عمرك بدقة!</p>
+            <h1>حاسبة العمر الاحترافية ⏱️</h1>
+            <p class="subtitle">اختر التقويم، حدد تاريخ ميلادك واكتشف تفاصيل عمرك بدقة بالهجري والميلادي!</p>
             
             <div class="calendar-selector">
                 <label>
@@ -188,7 +191,7 @@
                 <div class="dropdowns-container">
                     <select id="gregDay">
                         <option value="">اليوم</option>
-                        </select>
+                    </select>
                     
                     <select id="gregMonth">
                         <option value="">الشهر</option>
@@ -208,7 +211,7 @@
 
                     <select id="gregYear">
                         <option value="">السنة</option>
-                        </select>
+                    </select>
                 </div>
             </div>
             
@@ -216,7 +219,7 @@
                 <div class="dropdowns-container">
                     <select id="hijriDay">
                         <option value="">اليوم</option>
-                        </select>
+                    </select>
                     
                     <select id="hijriMonth">
                         <option value="">الشهر</option>
@@ -236,7 +239,7 @@
 
                     <select id="hijriYear">
                         <option value="">السنة</option>
-                        </select>
+                    </select>
                 </div>
             </div>
 
@@ -258,9 +261,7 @@
     <div class="sidebar-ad">مساحة إعلانية (يسار)</div>
 
     <script>
-        // تعبئة كل القوائم (الميلادية والهجرية) تلقائياً عند تشغيل الصفحة
         window.onload = function() {
-            // 1. تعبئة الأيام (31 للميلادي و 30 للهجري)
             const gregDay = document.getElementById('gregDay');
             const hijriDay = document.getElementById('hijriDay');
             
@@ -276,16 +277,14 @@
                 }
             }
 
-            // 2. تعبئة السنوات الميلادية (من السنة الحالية 2026 ونزولاً إلى 1940)
             const gregYear = document.getElementById('gregYear');
-            const currentGregYear = new Date().getFullYear(); // سيقرأ 2026 تلقائياً
+            const currentGregYear = new Date().getFullYear();
             for (let y = currentGregYear; y >= 1940; y--) {
                 let opt = document.createElement('option');
                 opt.value = y; opt.innerText = y;
                 gregYear.appendChild(opt);
             }
 
-            // 3. تعبئة السنوات الهجرية (من 1447 ونزولاً إلى 1360)
             const hijriYear = document.getElementById('hijriYear');
             const currentHijriYear = 1447; 
             for (let y = currentHijriYear; y >= 1360; y--) {
@@ -316,10 +315,9 @@
             }
         }
 
-        // حساب الميلادي المطور بناءً على القوائم المنسدلة الجديده
         function calculateGregorian() {
             const gDay = parseInt(document.getElementById("gregDay").value);
-            const gMonth = parseInt(document.getElementById("gregMonth").value) - 1; // الأشهر في البرمجة تبدأ من 0
+            const gMonth = parseInt(document.getElementById("gregMonth").value) - 1;
             const gYear = parseInt(document.getElementById("gregYear").value);
 
             if (!gDay || isNaN(gMonth) || !gYear) {
