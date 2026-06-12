@@ -12,101 +12,362 @@
     <title>حاسبة العمر الاحترافية - هجري وميلادي بالقوائم</title>
     
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 0; display: flex; justify-content: space-between; }
-        .sidebar-ad { width: 160px; height: 600px; margin: 20px; display: flex; align-items: center; justify-content: center; }
-        .main-content { flex: 1; max-width: 650px; margin: 20px auto; padding: 20px; text-align: center; }
-        .card { background-color: #ffffff; padding: 35px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0; }
-        h1 { color: #1e3a8a; margin-bottom: 10px; font-size: 28px; }
-        p.subtitle { color: #64748b; margin-bottom: 25px; font-size: 15px; }
-        .calendar-selector { margin-bottom: 25px; }
-        .calendar-selector label { font-size: 16px; font-weight: bold; color: #334155; margin: 0 15px; cursor: pointer; }
-        .calendar-selector input[type="radio"] { transform: scale(1.2); margin-left: 5px; cursor: pointer; }
-        select { padding: 12px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 8px; outline: none; text-align: center; background-color: white; transition: 0.3s; }
-        .dropdowns-container { display: flex; justify-content: center; gap: 10px; max-width: 85%; margin: 0 auto; }
-        .dropdowns-container select { width: 32%; font-size: 15px; }
-        button { width: 85%; background-color: #2563eb; color: white; border: none; padding: 14px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 25px; transition: 0.2s; }
-        button:hover { background-color: #1d4ed8; }
-        .result-box { margin-top: 30px; display: none; animation: fadeIn 0.5s ease-in-out; }
-        .result-item { background: #f8fafc; padding: 12px; margin: 8px 0; border-radius: 8px; border-right: 4px solid #3b82f6; text-align: right; font-size: 16px; color: #334155; }
-        .result-item span { font-weight: bold; color: #2563eb; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 900px) { .sidebar-ad { display: none; } body { justify-content: center; } }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sidebar-ad {
+            width: 160px;
+            height: 600px;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        p.subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .calendar-selector {
+            margin-bottom: 25px;
+        }
+
+        .calendar-selector label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #334155;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .calendar-selector input[type="radio"] {
+            transform: scale(1.2);
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        select {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        .dropdowns-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 85%;
+            margin: 0 auto;
+        }
+
+        .dropdowns-container select {
+            width: 32%;
+            font-size: 15px;
+        }
+
+        select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        button {
+            width: 85%;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .result-box {
+            margin-top: 30px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .result-item {
+            background: #f8fafc;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-right: 4px solid #3b82f6;
+            text-align: right;
+            font-size: 16px;
+            color: #334155;
+        }
+
+        .result-item span {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .ad-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar-ad { display: none; }
+            body { justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- إعلان جانبي (يمين) -->
     <div class="sidebar-ad">
-        <!-- كود الإعلان الجانبي -->
-        <script>atOptions = {'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {}};</script>
+        <script>
+            atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
         <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
     </div>
 
     <div class="main-content">
         <div class="card">
             <h1>حاسبة العمر الاحترافية ⏱️</h1>
-            <p class="subtitle">اختر التقويم، حدد تاريخ ميلادك واكتشف تفاصيل عمرك بدقة!</p>
+            <p class="subtitle">اختر التقويم، حدد تاريخ ميلادك واكتشف تفاصيل عمرك بدقة بالهجري والميلادي!</p>
             
             <div class="calendar-selector">
-                <label><input type="radio" name="calType" value="gregorian" checked onclick="toggleCalendarType()"> ميلادي</label>
-                <label><input type="radio" name="calType" value="hijri" onclick="toggleCalendarType()"> هجري</label>
+                <label>
+                    <input type="radio" name="calType" value="gregorian" checked onclick="toggleCalendarType()"> ميلادي
+                </label>
+                <label>
+                    <input type="radio" name="calType" value="hijri" onclick="toggleCalendarType()"> هجري
+                </label>
             </div>
 
+            <!-- قوائم اختيار ميلادي -->
             <div id="gregorianInput">
                 <div class="dropdowns-container">
                     <select id="gregDay"><option value="">اليوم</option></select>
-                    <select id="gregMonth"><option value="">الشهر</option><option value="1">1 - يناير</option><option value="2">2 - فبراير</option><option value="3">3 - مارس</option><option value="4">4 - أبريل</option><option value="5">5 - مايو</option><option value="6">6 - يونيو</option><option value="7">7 - يوليو</option><option value="8">8 - أغسطس</option><option value="9">9 - سبتمبر</option><option value="10">10 - أكتوبر</option><option value="11">11 - نوفمبر</option><option value="12">12 - ديسمبر</option></select>
+                    <select id="gregMonth">
+                        <option value="">الشهر</option>
+                        <option value="1">1 - يناير</option><option value="2">2 - فبراير</option><option value="3">3 - مارس</option>
+                        <option value="4">4 - أبريل</option><option value="5">5 - مايو</option><option value="6">6 - يونيو</option>
+                        <option value="7">7 - يوليو</option><option value="8">8 - أغسطس</option><option value="9">9 - سبتمبر</option>
+                        <option value="10">10 - أكتوبر</option><option value="11">11 - نوفمبر</option><option value="12">12 - ديسمبر</option>
+                    </select>
                     <select id="gregYear"><option value="">السنة</option></select>
                 </div>
             </div>
             
+            <!-- قوائم اختيار هجري -->
             <div id="hijriInput" style="display: none;">
                 <div class="dropdowns-container">
                     <select id="hijriDay"><option value="">اليوم</option></select>
-                    <select id="hijriMonth"><option value="">الشهر</option><option value="1">1 - محرم</option><option value="2">2 - صفر</option><option value="3">3 - ربيع الأول</option><option value="4">4 - ربيع الآخر</option><option value="5">5 - جمادى الأولى</option><option value="6">6 - جمادى الآخرة</option><option value="7">7 - رجب</option><option value="8">8 - شعبان</option><option value="9">9 - رمضان</option><option value="10">10 - شوال</option><option value="11">11 - ذو القعدة</option><option value="12">12 - ذو الحجة</option></select>
+                    <select id="hijriMonth">
+                        <option value="">الشهر</option>
+                        <option value="1">1 - محرم</option><option value="2">2 - صفر</option><option value="3">3 - ربيع الأول</option>
+                        <option value="4">4 - ربيع الآخر</option><option value="5">5 - جمادى الأولى</option><option value="6">6 - جمادى الآخرة</option>
+                        <option value="7">7 - رجب</option><option value="8">8 - شعبان</option><option value="9">9 - رمضان</option>
+                        <option value="10">10 - شوال</option><option value="11">11 - ذو القعدة</option><option value="12">12 - ذو الحجة</option>
+                    </select>
                     <select id="hijriYear"><option value="">السنة</option></select>
                 </div>
             </div>
 
+            <br>
             <button onclick="calculateAgeSelector()">احسب الآن</button>
 
-            <!-- الإعلان تحت الزر -->
-            <div style="margin-top:20px;">
-                <script>atOptions = {'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {}};</script>
+            <!-- إعلان مدمج (تحت الزر) -->
+            <div class="ad-box">
+                <script>
+                    atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+                </script>
                 <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
             </div>
 
             <div id="resultBox" class="result-box">
                 <div class="result-item">عمرك الإجمالي: <span id="resYears"></span> سنة، و <span id="resMonths"></span> شهر، و <span id="resDays"></span> يوم.</div>
+                <div class="result-item">إجمالي الأشهر: <span id="totalMonths"></span> شهر.</div>
+                <div class="result-item">إجمالي الأسابيع: <span id="totalWeeks"></span> أسبوع.</div>
                 <div class="result-item">إجمالي الأيام: <span id="totalDays"></span> يوم.</div>
+                <div class="result-item">إجمالي الساعات: <span id="totalHours"></span> ساعة.</div>
             </div>
         </div>
     </div>
 
-    <div class="sidebar-ad"></div>
+    <!-- إعلان جانبي (يسار) -->
+    <div class="sidebar-ad">
+        <script>
+            atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
+    </div>
 
     <script>
-        // (نفس الكود الخاص بك للمنطق والحسابات لا تغيير عليه)
         window.onload = function() {
-            const gregDay = document.getElementById('gregDay'); const hijriDay = document.getElementById('hijriDay');
+            const gregDay = document.getElementById('gregDay');
+            const hijriDay = document.getElementById('hijriDay');
+            
             for (let d = 1; d <= 31; d++) {
-                let opt = document.createElement('option'); opt.value = d; opt.innerText = d; gregDay.appendChild(opt);
-                if(d <= 30) { let optH = document.createElement('option'); optH.value = d; optH.innerText = d; hijriDay.appendChild(optH); }
+                let opt = document.createElement('option');
+                opt.value = d; opt.innerText = d;
+                gregDay.appendChild(opt);
+                
+                if(d <= 30) {
+                    let optH = document.createElement('option');
+                    optH.value = d; optH.innerText = d;
+                    hijriDay.appendChild(optH);
+                }
             }
-            const gregYear = document.getElementById('gregYear'); const currentGregYear = new Date().getFullYear();
-            for (let y = currentGregYear; y >= 1940; y--) { let opt = document.createElement('option'); opt.value = y; opt.innerText = y; gregYear.appendChild(opt); }
+
+            const gregYear = document.getElementById('gregYear');
+            const currentGregYear = new Date().getFullYear();
+            for (let y = currentGregYear; y >= 1940; y--) {
+                let opt = document.createElement('option');
+                opt.value = y; opt.innerText = y;
+                gregYear.appendChild(opt);
+            }
+
             const hijriYear = document.getElementById('hijriYear');
-            for (let y = 1447; y >= 1360; y--) { let opt = document.createElement('option'); opt.value = y; opt.innerText = y; hijriYear.appendChild(opt); }
+            for (let y = 1447; y >= 1360; y--) {
+                let opt = document.createElement('option');
+                opt.value = y; opt.innerText = y;
+                hijriYear.appendChild(opt);
+            }
         };
+
         function toggleCalendarType() {
             const type = document.querySelector('input[name="calType"]:checked').value;
-            document.getElementById('gregorianInput').style.display = type === 'gregorian' ? 'block' : 'none';
-            document.getElementById('hijriInput').style.display = type === 'hijri' ? 'block' : 'none';
+            if (type === 'gregorian') {
+                document.getElementById('gregorianInput').style.display = 'block';
+                document.getElementById('hijriInput').style.display = 'none';
+            } else {
+                document.getElementById('gregorianInput').style.display = 'none';
+                document.getElementById('hijriInput').style.display = 'block';
+            }
             document.getElementById("resultBox").style.display = "none";
         }
+
         function calculateAgeSelector() {
-            // (بقية كود الحسابات كما هو)
             const type = document.querySelector('input[name="calType"]:checked').value;
-            // ... (باقي منطق الحسابات)
+            if (type === 'gregorian') {
+                calculateGregorian();
+            } else {
+                calculateHijri();
+            }
+        }
+
+        function calculateGregorian() {
+            const gDay = parseInt(document.getElementById("gregDay").value);
+            const gMonth = parseInt(document.getElementById("gregMonth").value) - 1;
+            const gYear = parseInt(document.getElementById("gregYear").value);
+
+            if (!gDay || isNaN(gMonth) || !gYear) {
+                alert("الرجاء اختيار اليوم والشهر والسنة الميلادية بالكامل!");
+                return;
+            }
+
+            const birthDate = new Date(gYear, gMonth, gDay);
+            const today = new Date();
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                days += previousMonth;
+            }
+            if (months < 0) { years--; months += 12; }
+
+            displayResults(years, months, days, 365.25);
+        }
+
+        function calculateHijri() {
+            const hDay = parseInt(document.getElementById("hijriDay").value);
+            const hMonth = parseInt(document.getElementById("hijriMonth").value);
+            const hYear = parseInt(document.getElementById("hijriYear").value);
+
+            if (!hDay || !hMonth || !hYear) {
+                alert("الرجاء اختيار اليوم والشهر والسنة الهجرية بالكامل!");
+                return;
+            }
+
+            // حساب تقريبي معتمد بناءً على العام الهجري الحالي
+            const currentHDay = 27; 
+            const currentHMonth = 5; 
+            const currentHYear = 1447; 
+
+            let years = currentHYear - hYear;
+            let months = currentHMonth - hMonth;
+            let days = currentHDay - hDay;
+
+            if (days < 0) { months--; days += 30; }
+            if (months < 0) { years--; months += 12; }
+
+            displayResults(years, months, days, 354.36);
+        }
+
+        function displayResults(years, months, days, daysInYear) {
+            const totalMonthsCalculated = (years * 12) + months;
+            const totalDaysCalculated = Math.floor((years * daysInYear) + (months * 30.4) + days);
+            const totalWeeksCalculated = Math.floor(totalDaysCalculated / 7);
+            const totalHoursCalculated = totalDaysCalculated * 24;
+
+            document.getElementById("resYears").innerText = years;
+            document.getElementById("resMonths").innerText = months;
+            document.getElementById("resDays").innerText = days;
+            
+            document.getElementById("totalMonths").innerText = totalMonthsCalculated.toLocaleString();
+            document.getElementById("totalWeeks").innerText = totalWeeksCalculated.toLocaleString();
+            document.getElementById("totalDays").innerText = totalDaysCalculated.toLocaleString();
+            document.getElementById("totalHours").innerText = totalHoursCalculated.toLocaleString();
+
             document.getElementById("resultBox").style.display = "block";
         }
     </script>
