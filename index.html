@@ -18,24 +18,27 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .sidebar-ad {
-            width: 160px;
-            height: 600px;
-            margin: 20px;
+        .ad-banner-top {
+            width: 100%;
+            max-width: 728px;
+            min-height: 90px;
+            margin: 20px auto 10px auto;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .main-content {
-            flex: 1;
+            width: 100%;
             max-width: 650px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 10px auto;
+            padding: 10px;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .card {
@@ -145,33 +148,35 @@
             color: #2563eb;
         }
 
-        .ad-box {
-            margin-top: 20px;
+        .ad-box-bottom {
+            margin-top: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 90px;
+            width: 100%;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @media (max-width: 900px) {
-            .sidebar-ad { display: none; }
-            body { justify-content: center; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- إعلان جانبي (يمين) -->
-    <div class="sidebar-ad">
-        <script>
-            atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+    <!-- مساحة الإعلان العلوي العريض بعد إصلاح تهيئة الأرقام -->
+    <div class="ad-banner-top">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'cc104dbd254bfee2473c808399a1b897',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
         </script>
-        <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
     </div>
 
     <div class="main-content">
@@ -221,14 +226,6 @@
             <br>
             <button onclick="calculateAgeSelector()">احسب الآن</button>
 
-            <!-- إعلان مدمج (تحت الزر) -->
-            <div class="ad-box">
-                <script>
-                    atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-                </script>
-                <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
-            </div>
-
             <div id="resultBox" class="result-box">
                 <div class="result-item">عمرك الإجمالي: <span id="resYears"></span> سنة، و <span id="resMonths"></span> شهر، و <span id="resDays"></span> يوم.</div>
                 <div class="result-item">إجمالي الأشهر: <span id="totalMonths"></span> شهر.</div>
@@ -236,15 +233,22 @@
                 <div class="result-item">إجمالي الأيام: <span id="totalDays"></span> يوم.</div>
                 <div class="result-item">إجمالي الساعات: <span id="totalHours"></span> ساعة.</div>
             </div>
-        </div>
-    </div>
 
-    <!-- إعلان جانبي (يسار) -->
-    <div class="sidebar-ad">
-        <script>
-            atOptions = { 'key' : 'cc104dbd254bfee2473c808399a1b897', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-        </script>
-        <script src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
+            <!-- مساحة الإعلان السفلي العريض بعد إصلاح تهيئة الأرقام -->
+            <div class="ad-box-bottom">
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'cc104dbd254bfee2473c808399a1b897',
+                        'format' : 'iframe',
+                        'height' : 90,
+                        'width' : 728,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="https://www.highperformanceformat.com/cc104dbd254bfee2473c808399a1b897/invoke.js"></script>
+            </div>
+
+        </div>
     </div>
 
     <script>
@@ -338,7 +342,6 @@
                 return;
             }
 
-            // حساب تقريبي معتمد بناءً على العام الهجري الحالي
             const currentHDay = 27; 
             const currentHMonth = 5; 
             const currentHYear = 1447; 
